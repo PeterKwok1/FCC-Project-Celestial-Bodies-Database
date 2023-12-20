@@ -50,7 +50,9 @@ SET default_table_access_method = heap;
 CREATE TABLE public.galaxy (
     galaxy_id integer NOT NULL,
     name character varying(30),
-    origin text
+    origin text,
+    constellation character varying(30),
+    notes text
 );
 
 
@@ -258,9 +260,9 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.galaxy VALUES (1, 'Milky Way', 'The appearance from Earth of the galaxy—a band of light');
-INSERT INTO public.galaxy VALUES (2, 'Andromeda', 'Andromeda, which is shortened from "Andromeda Galaxy", gets its name from the area of the sky in which it appears, the constellation of Andromeda.');
-INSERT INTO public.galaxy VALUES (3, 'Comet', 'This galaxy is named after its unusual appearance, looking like a comet.');
+INSERT INTO public.galaxy VALUES (1, 'Milky Way', 'The appearance from Earth of the galaxy—a band of light', NULL, NULL);
+INSERT INTO public.galaxy VALUES (2, 'Andromeda', 'Andromeda, which is shortened from "Andromeda Galaxy", gets its name from the area of the sky in which it appears, the constellation of Andromeda.', NULL, NULL);
+INSERT INTO public.galaxy VALUES (3, 'Comet', 'This galaxy is named after its unusual appearance, looking like a comet.', NULL, NULL);
 
 
 --
