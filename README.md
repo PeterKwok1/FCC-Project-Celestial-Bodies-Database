@@ -13,31 +13,31 @@ https://en.wikipedia.org/wiki/List_of_natural_satellites
 galaxy
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  origin - TEXT, NON NULL
+  origin - TEXT
   constellation - VARCHAR
   notes - TEXT
 star
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  mass - INT, NON NULL
-  distance_ly - NUMERIC
-  notes - TEXT
+  mass - INT
+  distance_ly - INT
+  galaxy_id - INT
 planet
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  distance from sun - NUMERIC, NON NULL
-  orbital_speed - INT
+  distance from sun - NUMERIC
   has_life - BOOLEAN
+  star_id - INT
 moon
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  parent - VARCHAR, NON NULL
+  parent - VARCHAR
   is_spherical - BOOLEAN
-  radius_km - INT
+  planet_id - INT
 discovery
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  date - DATE, NON NULL
+  date - DATE
   galaxy_id - INT
   star_id - INT
   planet_id - INT
