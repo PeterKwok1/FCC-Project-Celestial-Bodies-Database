@@ -44,6 +44,45 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: discovery; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.discovery (
+    discovery_id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    date date,
+    galaxy_id integer,
+    star_id integer,
+    planet_id integer,
+    moon_id integer
+);
+
+
+ALTER TABLE public.discovery OWNER TO freecodecamp;
+
+--
+-- Name: discovery_discover_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
+--
+
+CREATE SEQUENCE public.discovery_discover_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.discovery_discover_id_seq OWNER TO freecodecamp;
+
+--
+-- Name: discovery_discover_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
+--
+
+ALTER SEQUENCE public.discovery_discover_id_seq OWNED BY public.discovery.discovery_id;
+
+
+--
 -- Name: galaxy; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -86,8 +125,10 @@ ALTER SEQUENCE public.galaxy_galaxy_id_seq OWNED BY public.galaxy.galaxy_id;
 
 CREATE TABLE public.moon (
     moon_id integer NOT NULL,
-    name character varying(30),
-    planet_id integer
+    name character varying(30) NOT NULL,
+    planet_id integer,
+    parent character varying(30),
+    is_spherical boolean
 );
 
 
@@ -190,6 +231,13 @@ ALTER SEQUENCE public.star_star_id_seq OWNED BY public.star.star_id;
 
 
 --
+-- Name: discovery discovery_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery ALTER COLUMN discovery_id SET DEFAULT nextval('public.discovery_discover_id_seq'::regclass);
+
+
+--
 -- Name: galaxy galaxy_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
@@ -218,6 +266,12 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 
 
 --
+-- Data for Name: discovery; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+
+
+--
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
@@ -242,6 +296,13 @@ INSERT INTO public.galaxy VALUES (3, 'Comet', 'This galaxy is named after its un
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+
+
+--
+-- Name: discovery_discover_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.discovery_discover_id_seq', 1, false);
 
 
 --
@@ -273,6 +334,22 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 1, false);
 
 
 --
+-- Name: discovery discovery_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery
+    ADD CONSTRAINT discovery_name_key UNIQUE (name);
+
+
+--
+-- Name: discovery discovery_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery
+    ADD CONSTRAINT discovery_pkey PRIMARY KEY (discovery_id);
+
+
+--
 -- Name: galaxy galaxy_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
@@ -286,6 +363,14 @@ ALTER TABLE ONLY public.galaxy
 
 ALTER TABLE ONLY public.galaxy
     ADD CONSTRAINT galaxy_pkey PRIMARY KEY (galaxy_id);
+
+
+--
+-- Name: moon moon_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_name_key UNIQUE (name);
 
 
 --
@@ -334,6 +419,38 @@ ALTER TABLE ONLY public.star
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_pkey PRIMARY KEY (star_id);
+
+
+--
+-- Name: discovery discovery_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery
+    ADD CONSTRAINT discovery_galaxy_id_fkey FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
+
+
+--
+-- Name: discovery discovery_moon_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery
+    ADD CONSTRAINT discovery_moon_id_fkey FOREIGN KEY (moon_id) REFERENCES public.moon(moon_id);
+
+
+--
+-- Name: discovery discovery_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery
+    ADD CONSTRAINT discovery_planet_id_fkey FOREIGN KEY (planet_id) REFERENCES public.planet(planet_id);
+
+
+--
+-- Name: discovery discovery_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.discovery
+    ADD CONSTRAINT discovery_star_id_fkey FOREIGN KEY (star_id) REFERENCES public.star(star_id);
 
 
 --
