@@ -201,7 +201,7 @@ CREATE TABLE public.star (
     star_id integer NOT NULL,
     name character varying(30) NOT NULL,
     galaxy_id integer,
-    mass integer,
+    mass_solar integer,
     distance_ly integer
 );
 
@@ -275,9 +275,10 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.galaxy VALUES (1, 'Milky Way', 'The appearance from Earth of the galaxy—a band of light', NULL, NULL);
-INSERT INTO public.galaxy VALUES (2, 'Andromeda', 'Andromeda, which is shortened from "Andromeda Galaxy", gets its name from the area of the sky in which it appears, the constellation of Andromeda.', NULL, NULL);
 INSERT INTO public.galaxy VALUES (3, 'Comet', 'This galaxy is named after its unusual appearance, looking like a comet.', NULL, NULL);
+INSERT INTO public.galaxy VALUES (1, 'Milky Way', 'The appearance from Earth of the galaxy—a band of light', 'Sagittarius', 'The galaxy containing the Sun and its Solar System, and therefore Earth.');
+INSERT INTO public.galaxy VALUES (2, 'Andromeda', 'Andromeda, which is shortened from "Andromeda Galaxy", gets its name from the area of the sky in which it appears, the constellation of Andromeda.', 'Andromeda', 'Andromeda is the closest big galaxy to the Milky Way and is expected to collide with the Milky Way around 4.5 billion years from now. The two will eventually merge into a single new galaxy called Milkdromeda.');
+INSERT INTO public.galaxy VALUES (5, 'Antennae Galaxies', 'Appearance is similar to an insect''s antennae.', 'Corvus', 'Two colliding galaxies');
 
 
 --
@@ -296,6 +297,7 @@ INSERT INTO public.galaxy VALUES (3, 'Comet', 'This galaxy is named after its un
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.star VALUES (1, 'Sun', 1, 1, 0);
 
 
 --
@@ -309,7 +311,7 @@ SELECT pg_catalog.setval('public.discovery_discover_id_seq', 1, false);
 -- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 3, true);
+SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 5, true);
 
 
 --
@@ -330,7 +332,7 @@ SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, false);
 -- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 1, false);
+SELECT pg_catalog.setval('public.star_star_id_seq', 1, true);
 
 
 --
