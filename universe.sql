@@ -163,8 +163,8 @@ ALTER SEQUENCE public.moon_moon_id_seq OWNED BY public.moon.moon_id;
 CREATE TABLE public.planet (
     planet_id integer NOT NULL,
     name character varying(30) NOT NULL,
-    start_id integer,
-    distance_from_sun numeric,
+    star_id integer,
+    distance_from_sun_km numeric,
     has_life boolean
 );
 
@@ -279,6 +279,8 @@ INSERT INTO public.galaxy VALUES (3, 'Comet', 'This galaxy is named after its un
 INSERT INTO public.galaxy VALUES (1, 'Milky Way', 'The appearance from Earth of the galaxy—a band of light', 'Sagittarius', 'The galaxy containing the Sun and its Solar System, and therefore Earth.');
 INSERT INTO public.galaxy VALUES (2, 'Andromeda', 'Andromeda, which is shortened from "Andromeda Galaxy", gets its name from the area of the sky in which it appears, the constellation of Andromeda.', 'Andromeda', 'Andromeda is the closest big galaxy to the Milky Way and is expected to collide with the Milky Way around 4.5 billion years from now. The two will eventually merge into a single new galaxy called Milkdromeda.');
 INSERT INTO public.galaxy VALUES (5, 'Antennae Galaxies', 'Appearance is similar to an insect''s antennae.', 'Corvus', 'Two colliding galaxies');
+INSERT INTO public.galaxy VALUES (6, 'Bode''s Galaxy', 'Named for Johann Elert Bode who discovered this galaxy in 1774.', 'Ursa Major', 'Also known as Messier 81. The largest galaxy in the M81 Group. It harbors a supermassive black hole 70 million times the mass of the Sun.');
+INSERT INTO public.galaxy VALUES (7, 'Eye of God', 'Name after its structural appearance', 'Eridanus', 'A prototype for multi-arm spiral galaxies');
 
 
 --
@@ -291,6 +293,10 @@ INSERT INTO public.galaxy VALUES (5, 'Antennae Galaxies', 'Appearance is similar
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.planet VALUES (2, 'Venus', 1, 108208930, false);
+INSERT INTO public.planet VALUES (3, 'Earth', 1, 149597890, true);
+INSERT INTO public.planet VALUES (1, 'Mercury', 1, 57909175, false);
+INSERT INTO public.planet VALUES (4, 'Mars', 1, 227936640, false);
 
 
 --
@@ -298,6 +304,11 @@ INSERT INTO public.galaxy VALUES (5, 'Antennae Galaxies', 'Appearance is similar
 --
 
 INSERT INTO public.star VALUES (1, 'Sun', 1, 1, 0);
+INSERT INTO public.star VALUES (2, 'Proxima Centauri', 1, 0, 4);
+INSERT INTO public.star VALUES (3, 'Rigil Kentaurus', 1, 1, 4);
+INSERT INTO public.star VALUES (4, 'Barnard''s Star', 1, 0, 6);
+INSERT INTO public.star VALUES (5, 'Sirius', 1, 2, 9);
+INSERT INTO public.star VALUES (6, 'Ran', 1, 1, 10);
 
 
 --
@@ -311,7 +322,7 @@ SELECT pg_catalog.setval('public.discovery_discover_id_seq', 1, false);
 -- Name: galaxy_galaxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 5, true);
+SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 7, true);
 
 
 --
@@ -325,14 +336,14 @@ SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, false);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 4, true);
 
 
 --
 -- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 1, true);
+SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
 
 
 --
@@ -468,7 +479,7 @@ ALTER TABLE ONLY public.moon
 --
 
 ALTER TABLE ONLY public.planet
-    ADD CONSTRAINT planet_start_id_fkey FOREIGN KEY (start_id) REFERENCES public.star(star_id);
+    ADD CONSTRAINT planet_start_id_fkey FOREIGN KEY (star_id) REFERENCES public.star(star_id);
 
 
 --

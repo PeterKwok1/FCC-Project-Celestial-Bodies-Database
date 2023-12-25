@@ -19,13 +19,13 @@ galaxy
 star
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  mass - INT
+  mass_solar - INT
   distance_ly - INT
   galaxy_id - INT
 planet
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  distance from sun - NUMERIC
+  distance_from_sun_km - NUMERIC
   has_life - BOOLEAN
   star_id - INT
 moon
