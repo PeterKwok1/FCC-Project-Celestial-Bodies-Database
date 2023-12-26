@@ -11,24 +11,28 @@ galaxy
 - origin - TEXT
 - constellation - VARCHAR
 - notes - TEXT
+
 star
 - id - SERIAL
 - name - VARCHAR, NON NULL, UNIQUE
 - mass_solar - INT
 - distance_ly - INT
 - galaxy_id - INT
+
 planet
 - id - SERIAL
 - name - VARCHAR, NON NULL, UNIQUE
 - distance_from_sun_km - NUMERIC
 - has_life - BOOLEAN
 - star_id - INT
+
 moon
 - id - SERIAL
 - name - VARCHAR, NON NULL, UNIQUE
 - radius_km - INT
 - is_spherical - BOOLEAN
 - planet_id - INT
+
 discovery
 - id - SERIAL
 - name - VARCHAR, NON NULL, UNIQUE
@@ -38,6 +42,7 @@ discovery
 - planet_id - INT
 - moon_id - INT
 
+# Commands
 Restart
 ```
 sudo service postgresql restart
