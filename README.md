@@ -1,5 +1,4 @@
 # To do
-Test unique and non null constraints
 Join finished data
   Join and order?
 
@@ -31,7 +30,7 @@ planet
 moon
   id - SERIAL
   name - VARCHAR, NON NULL, UNIQUE
-  parent - VARCHAR
+  radius_km - INT
   is_spherical - BOOLEAN
   planet_id - INT
 discovery
