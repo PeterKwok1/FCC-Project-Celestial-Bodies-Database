@@ -127,7 +127,7 @@ CREATE TABLE public.moon (
     moon_id integer NOT NULL,
     name character varying(30) NOT NULL,
     planet_id integer,
-    parent character varying(30),
+    radius_km integer,
     is_spherical boolean
 );
 
@@ -269,6 +269,9 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 -- Data for Name: discovery; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.discovery VALUES (4, 'Robert Innes', '1915-10-12', NULL, 2, NULL, NULL);
+INSERT INTO public.discovery VALUES (5, 'Galileo Galilei', '1610-01-08', NULL, NULL, NULL, 4);
+INSERT INTO public.discovery VALUES (6, 'Galileo Galilei', '1610-01-08', NULL, NULL, NULL, 5);
 
 
 --
@@ -287,6 +290,26 @@ INSERT INTO public.galaxy VALUES (7, 'Eye of God', 'Name after its structural ap
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.moon VALUES (1, 'Moon', 3, 1738, true);
+INSERT INTO public.moon VALUES (2, 'Phobos', 4, 11, false);
+INSERT INTO public.moon VALUES (3, 'Deimos', 4, 6, false);
+INSERT INTO public.moon VALUES (4, 'Io', 37, 1822, true);
+INSERT INTO public.moon VALUES (5, 'Europa', 37, 1561, true);
+INSERT INTO public.moon VALUES (6, 'Ganymede', 37, 2634, true);
+INSERT INTO public.moon VALUES (7, 'Mimas', 38, 198, true);
+INSERT INTO public.moon VALUES (8, 'Enceladus', 38, 252, true);
+INSERT INTO public.moon VALUES (9, 'Tethys', 38, 533, true);
+INSERT INTO public.moon VALUES (10, 'Ariel', 39, 579, true);
+INSERT INTO public.moon VALUES (11, 'Umbriel', 39, 585, true);
+INSERT INTO public.moon VALUES (12, 'Titania', 39, 789, true);
+INSERT INTO public.moon VALUES (13, 'Triton', 40, 1353, true);
+INSERT INTO public.moon VALUES (14, 'Proteus', 40, 210, false);
+INSERT INTO public.moon VALUES (15, 'Charon', 42, 606, true);
+INSERT INTO public.moon VALUES (16, 'Nix', 42, 23, false);
+INSERT INTO public.moon VALUES (17, 'Callisto', 37, 2410, true);
+INSERT INTO public.moon VALUES (18, 'Amalthea', 37, 84, false);
+INSERT INTO public.moon VALUES (19, 'Dione', 38, 561, true);
+INSERT INTO public.moon VALUES (20, 'Rhea', 38, 764, true);
 
 
 --
@@ -297,6 +320,14 @@ INSERT INTO public.planet VALUES (2, 'Venus', 1, 108208930, false);
 INSERT INTO public.planet VALUES (3, 'Earth', 1, 149597890, true);
 INSERT INTO public.planet VALUES (1, 'Mercury', 1, 57909175, false);
 INSERT INTO public.planet VALUES (4, 'Mars', 1, 227936640, false);
+INSERT INTO public.planet VALUES (38, 'Saturn', 1, 1426725400, false);
+INSERT INTO public.planet VALUES (37, 'Jupiter', 1, 778412010, false);
+INSERT INTO public.planet VALUES (39, 'Uranus', 1, 2870972200, false);
+INSERT INTO public.planet VALUES (40, 'Neptune', 1, 4498252900, false);
+INSERT INTO public.planet VALUES (41, 'Ceres', 1, 413700000, false);
+INSERT INTO public.planet VALUES (42, 'Pluto', 1, 5906380000, false);
+INSERT INTO public.planet VALUES (43, 'Haumea', 1, 6484000000, false);
+INSERT INTO public.planet VALUES (44, 'Makemake', 1, 6850000000, false);
 
 
 --
@@ -315,7 +346,7 @@ INSERT INTO public.star VALUES (6, 'Ran', 1, 1, 10);
 -- Name: discovery_discover_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.discovery_discover_id_seq', 1, false);
+SELECT pg_catalog.setval('public.discovery_discover_id_seq', 6, true);
 
 
 --
@@ -329,14 +360,14 @@ SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 7, true);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 20, true);
 
 
 --
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 4, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 44, true);
 
 
 --
@@ -347,11 +378,11 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
 
 
 --
--- Name: discovery discovery_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: discovery discovery_galaxy_id_star_id_planet_id_moon_id_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.discovery
-    ADD CONSTRAINT discovery_name_key UNIQUE (name);
+    ADD CONSTRAINT discovery_galaxy_id_star_id_planet_id_moon_id_key UNIQUE (galaxy_id, star_id, planet_id, moon_id);
 
 
 --

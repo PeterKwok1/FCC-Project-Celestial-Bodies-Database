@@ -1,7 +1,3 @@
-# To do
-Join finished data
-  Join and order?
-
 # Dataset
 https://en.wikipedia.org/wiki/List_of_galaxies
 https://en.wikipedia.org/wiki/Lists_of_stars
