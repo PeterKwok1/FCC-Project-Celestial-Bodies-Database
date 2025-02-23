@@ -1,10 +1,12 @@
-# Dataset
+# FCC Project Celestial Bodies Database
+
+## Dataset
 - https://en.wikipedia.org/wiki/List_of_galaxies
 - https://en.wikipedia.org/wiki/Lists_of_stars
 - https://en.wikipedia.org/wiki/Lists_of_planets
 - https://en.wikipedia.org/wiki/List_of_natural_satellites
 
-# Data Structure 
+## Data Structure 
 galaxy
 - id - SERIAL
 - name - VARCHAR, NON NULL, UNIQUE
@@ -42,7 +44,7 @@ discovery
 - planet_id - INT
 - moon_id - INT
 
-# Commands
+## Commands
 Restart
 ```
 sudo service postgresql restart
